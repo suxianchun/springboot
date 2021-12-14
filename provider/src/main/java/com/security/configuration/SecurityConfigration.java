@@ -13,11 +13,18 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http.authorizeRequests()
+                .antMatchers("/product/**").hasRole("USER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and().formLogin().and().httpBasic();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("spring").password("{noop}123456").roles("USER");
+        auth.inMemoryAuthentication()
+                .withUser("admin").password("{noop}adminpass").roles("ADMIN","USER")
+                .and()
+                .withUser("spring").password("{noop}123456").roles("USER");
     }
 }

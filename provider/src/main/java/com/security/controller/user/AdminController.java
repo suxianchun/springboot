@@ -1,17 +1,16 @@
-package com.security.controller.product;
+package com.security.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/admin")
+public class AdminController {
 
     @RequestMapping("/info")
     @ResponseBody
-    public String productInfo()
-    {
-        return "product info";
+    public String user(){
+        return "admin info";
     }
 }
