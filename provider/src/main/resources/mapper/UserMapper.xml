@@ -36,4 +36,9 @@
     select id, username, `password`, `role`
     from user
   </select>
+  <select id="selectUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select id, password, role
+    from user
+    where username = #{username}
+  </select>
 </mapper>
