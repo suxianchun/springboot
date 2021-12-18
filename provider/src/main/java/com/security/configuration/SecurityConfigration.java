@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfigration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -34,14 +34,17 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().and().httpBasic();*/
-        http
+        /*http
                 .authorizeRequests()
                 .antMatchers("/product/**").hasAuthority("USER")
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().and()
-                .httpBasic();
+                .httpBasic();*/
+        http.antMatcher("/auth/**")
+                .authorizeRequests().antMatchers("/auth/**")
+                .permitAll().and().csrf().disable();
     }
 
     @Override
